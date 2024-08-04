@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang=en>
+<head>
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Join Us</title>
+<link rel=stylesheet href=/Css/infoPage.css>
+<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/android-icon-36x36.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+</head>
+<body>
+<div class=form-container>
+<h1>Join Us</h1>
+<p>Please fill out this information</p>
+<form action=/user/info method=post>
+<div class=form-row>
+<div class=form-group>
+<label for=first-name>First Name</label>
+<input id=first-name name=firstName required placeholder="Your First Name">
+</div>
+<div class=form-group>
+<label for=last-name>Last Name</label>
+<input id=last-name name=lastName required placeholder="Your Last Name">
+</div>
+</div>
+<div class=form-row>
+<div class=form-group>
+<label for=age>Age</label>
+<input type=number id=age name=age required placeholder="Your Age">
+</div>
+<div class=form-group>
+<label for=weight>Weight (kg)</label>
+<input type=number id=weight name=weight required placeholder="Your Weight">
+</div>
+</div>
+<div class=form-row>
+<div class=form-group>
+<label for=height>Height (Feet)</label>
+<input type=number id=height name=height required placeholder="Your Height">
+</div>
+<div class=form-group>
+<label for=physical-activity>Physical Activity</label>
+<select id=physical-activity name=physicalActivity required>
+<option value="" disabled selected>
+Select your activity level
+</option>
+<option value=None>None</option>
+<option value=Light>Light</option>
+<option value=Moderate>Moderate</option>
+<option value=Active>Active</option>
+<option value="Very Active">Very Active</option>
+</select>
+</div>
+</div>
+<div class=form-row>
+<div class=form-group>
+<label for=phoneNumber>Phone Number</label>
+<input type=tel id=phone name=phoneNumber minlength=11 maxlength=11 required placeholder="Your Phone Number">
+</div>
+<div class=form-group>
+<label for=allergy>Allergy</label>
+<input id=allergy name=allergy required placeholder="Any Allergies">
+</div>
+</div>
+<div class=form-group>
+<label for=message>Message (optional)</label>
+<textarea id=message name=message rows=4 placeholder="Tell Us More About Yourself"></textarea>
+</div>
+<div class=form-group>
+<label>Gender</label>
+<div class=gender-group>
+<label><input type=radio name=gender value=Male required>
+Male</label>
+<label><input type=radio name=gender value=Female required>
+Female</label>
+</div>
+</div>
+<button type=submit class=btn>Submit</button>
+</form>
+</div>
+</body>
+</html>

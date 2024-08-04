@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="/Css/counsling.css"/>
+<%- layout('layouts/boilerplate') %>
+<title>Counseling Request</title>
+<div class="form-container">
+  <h1>Session Request</h1>
+  <form action="/counseling/request/<%= id %>" method="post">
+    <!-- Full Name Field -->
+    <div class="form-group">
+      <label for="fullname">Full Name:</label>
+      <input type="text" id="fullname" name="fullname" required />
+    </div>
+
+    <!-- Reason Field -->
+    <div class="form-group">
+      <label for="reason">Reason:</label>
+      <textarea
+        id="reason"
+        name="reason"
+        rows="6"
+        cols="50"
+        required
+      ></textarea>
+    </div>
+
+    <!-- Date Field -->
+    <div class="form-group">
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" required />
+      <!-- Note about verification time -->
+      <p class="note">
+        Note: Verification may take up to one day. Please choose your date
+        accordingly.
+      </p>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn">Submit</button>
+  </form>
+</div>

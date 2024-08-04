@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang=en>
+<head>
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Edit Info</title>
+<link rel=stylesheet href=/Css/editpage.css>
+<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/android-icon-36x36.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+</head>
+<body>
+<div class=dashboard-container>
+<h1>Edit Information</h1>
+<form class=edit-form action="/user/edit-info/<%= userData._id %>?_method=PUT" method=POST>
+<div class=form-group>
+<label for=first-name>First Name</label>
+<input id=first-name name=firstName value="<%= userData.firstName %>" required>
+</div>
+<div class=form-group>
+<label for=last-name>Last Name</label>
+<input id=last-name name=lastName value="<%= userData.lastName %>" required>
+</div>
+<div class=form-group>
+<label for=age>Age</label>
+<input type=number id=age name=age value="<%= userData.age %>" required>
+</div>
+<div class=form-group>
+<label for=weight>Weight (kg)</label>
+<input type=number id=weight name=weight value="<%= userData.weight %>" required>
+</div>
+<div class=form-group>
+<label for=height>Height (cm)</label>
+<input type=number id=height name=height value="<%= userData.height %>" required>
+</div>
+<div class=form-group>
+<label for=physical-activity>Physical Activity</label>
+<select id=physical-activity name=physicalActivity required>
+<option value=sedentary <% if(userData.physicalActivity === 'sedentary') { %> selected <% } %>>None</option>
+<option value=light <% if(userData.physicalActivity === 'light') { %> selected <% } %>>Light</option>
+<option value=moderate <% if(userData.physicalActivity === 'moderate') { %> selected <% } %>>Moderate</option>
+<option value=active <% if(userData.physicalActivity === 'active') { %> selected <% } %>>Active</option>
+<option value=very-active <% if(userData.physicalActivity === 'very-active') { %> selected <% } %>>Very Active</option>
+</select>
+</div>
+<div class=form-group>
+<label for=allergy>Allergy</label>
+<input id=allergy name=allergy value="<%= userData.allergy %>" required>
+</div>
+<div class=form-group>
+<label for=phone>Phone Number</label>
+<input type=tel id=phone name=phone value="<%= userData.phoneNumber %>" required>
+</div>
+<div class=form-group>
+<label>Gender</label>
+<div class=gender-group>
+<label><input type=radio name=gender value=male <% if(userData.gender === 'male') { %> checked <% } %> required> Male</label>
+<label><input type=radio name=gender value=female <% if(userData.gender === 'female') { %> checked <% } %> required> Female</label>
+</div>
+</div>
+<div class="btn-container edit-mode">
+<a class="btn cancel" href="/user/dashboard/<%= userData.accountId %>">&#8592; Back</a>
+<button type=submit class="btn save">Save &#8594;</button>
+</div>
+</form>
+</div>
+</body>
+</html>

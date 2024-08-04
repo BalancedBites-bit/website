@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="/Css/Login.css" />
+<title>Verify OTP</title>
+<%- layout('layouts/boilerplate') %>
+<div class="container">
+  <form action="/otp/verify" method="post">
+    <div class="form-container">
+      <h2>Verify OTP</h2>
+      <div class="input-container">
+        <input type="number" id="otp" name="otp" required placeholder="" />
+        <label for="otp">Enter OTP</label>
+      </div>
+      <button type="submit">Verify</button>
+      <div class="countdown-timer" id="countdown">Resend OTP in 30 seconds</div>
+      <a class="forgot-password" href="/otp/resend" id="resend-otp" style="pointer-events: none; color: grey;">Resend OTP</a>
+    </div>
+  </form>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    let countdownElement = document.getElementById('countdown');
+    let resendOtpButton = document.getElementById('resend-otp');
+    let timeLeft = 30;
+
+    let countdownTimer = setInterval(function() {
+      if (timeLeft <= 0) {
+        clearInterval(countdownTimer);
+        countdownElement.textContent = "You can now resend the OTP.";
+        resendOtpButton.style.pointerEvents = 'auto';
+        resendOtpButton.style.color = 'blue'; // Change color to indicate it is clickable
+      } else {
+        countdownElement.textContent = `Resend OTP in ${timeLeft} seconds`;
+      }
+      timeLeft -= 1;
+    }, 1000);
+  });
+</script>

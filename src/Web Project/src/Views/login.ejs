@@ -1,0 +1,41 @@
+<%- layout('layouts/boilerplate') %>
+<title>Login</title>
+<link rel="stylesheet" href="/Css/Login.css" />
+<div class="container">
+  <div class="form-container login-container">
+    <form action="/login" method="post">
+      <h2>Login</h2>
+      <div class="input-container">
+        <input
+          type="text"
+          id="login-username"
+          required
+          placeholder=""
+          name="login"
+        />
+        <label for="login">Email/Username</label>
+      </div>
+      <div class="input-container">
+        <input
+          type="password"
+          id="password"
+          required
+          placeholder=" "
+          name="password"
+        />
+        <label for="password">Password</label>
+        <span class="password-toggle" onclick="togglePasswordVisibility('password')"
+          >👁️</span
+        >
+        <a href="/password/forgot" class="forgot-password">Forgot Password?</a>
+      </div>
+      <button type="submit">Login</button>
+      <button type="button" class="toggle-button">
+        <a class="toggle-button" href="/register"
+          >Don't have an account? Register</a
+        >
+      </button>
+    </form>
+  </div>
+</div>
+<script src="/js/showPassword.js"></script>

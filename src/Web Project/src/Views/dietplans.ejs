@@ -1,0 +1,40 @@
+<link rel=stylesheet href=/Css/dietplans.css>
+<title>Diet Plans</title>
+<%- layout('layouts/boilerplate') %>
+<div class=pricing-section>
+<div class=hero>
+<h1>Choose Your Perfect Plan</h1>
+<p>
+Elevate your health and lifestyle with our expertly tailored diet plans. Find the ideal plan that matches your goals and embark on your wellness journey today!
+</p>
+</div>
+<div class=pricing-form>
+<div class=header id=plan-header>
+<h2>Plan</h2>
+<p id=plan-description>Description</p>
+</div>
+<label for=plan>Type of Diet Plan</label>
+<form action=/user/dietplan method=post>
+<select id=plan name=dietType>
+<option value="Basic Diet Plan">Basic Diet Plan</option>
+<option value="Weight Loss Plan">Weight Loss Plan</option>
+<option value="Weight Gain Plan">Weight Gain Plan</option>
+<option value="Muscle Gain Plan">Muscle Gain Plan</option>
+<option value="Fitness Plan">Fitness Plan</option>
+<option value="Keto Plan">Keto Plan</option>
+</select>
+<label for=months>Number of Months</label>
+<select id=months name=duration>
+<option value=1>1 month</option>
+<option value=2>2 months</option>
+</select>
+<div class=features id=features>
+<h3>Features</h3>
+<ul id=feature-list></ul>
+</div>
+<div class=price id=price>PKR 0</div>
+<button class=apply-button type=submit>Apply</button>
+</form>
+</div>
+</div>
+<script>const planSelect=document.getElementById("plan"),monthsInput=document.getElementById("months"),priceDiv=document.getElementById("price"),featureList=document.getElementById("feature-list"),planHeader=document.getElementById("plan-header"),planDescription=document.getElementById("plan-description"),plans={"Basic Diet Plan":{name:"Basic Diet Plan",description:"Get the essential nutrients and balanced calories your body needs daily.",price:{1:4e3,2:6e3},features:["Customizable meal suggestions","Access to healthy recipes","Dietary tips and guidelines"]},"Weight Loss Plan":{name:"Weight Loss Plan",description:"Shed those extra pounds with a tailored plan just for you.",price:{1:4e3,2:6e3},features:["Targeted calorie control","Motivational support resources","Healthy snack alternatives"]},"Weight Gain Plan":{name:"Weight Gain Plan",description:"Gain healthy weight with a diet plan crafted for your needs.",price:{1:4e3,2:6e3},features:["High-calorie meal options","Access to premium recipes","Nutritional supplement recommendations"]},"Muscle Gain Plan":{name:"Muscle Gain Plan",description:"Build muscle mass effectively with our specialized diet plan.",price:{1:4e3,2:6e3},features:["Protein-rich meal plans","Access to premium recipes","Workout nutrition guide"]},"Fitness Plan":{name:"Fitness Plan",description:"Achieve a leaner, healthier body with our comprehensive fitness plan.",price:{1:4e3,2:6e3},features:["Balanced nutrition plan","Access to premium recipes","Monthly fitness consultations"]},"Keto Plan":{name:"Keto Plan",description:"Experience rapid weight loss with our effective Keto plan.",price:{1:4e3,2:6e3},features:["Ketogenic meal plans","Access to premium recipes","Monthly keto consultations"]}};function calculatePrice(){const e=planSelect.value,t=parseInt(monthsInput.value),n=plans[e].price[t]||plans[e].price[1]*t;priceDiv.textContent=`PKR ${n}`,updateHeader(e),updateFeatures(e)}function updateHeader(e){planHeader.querySelector("h2").textContent=plans[e].name,planDescription.textContent=plans[e].description}function updateFeatures(e){featureList.innerHTML="",plans[e].features.forEach((e=>{const t=document.createElement("li");t.textContent=e,t.style.opacity=0,featureList.appendChild(t),setTimeout((()=>t.style.opacity=1),100)}))}planSelect.addEventListener("change",calculatePrice),monthsInput.addEventListener("input",calculatePrice),planSelect.value="Basic Diet Plan",monthsInput.value="1",calculatePrice()</script>

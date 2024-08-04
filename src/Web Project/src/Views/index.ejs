@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang=en>
+<head>
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>BalancedBites</title>
+<link rel=preconnect href=https://fonts.googleapis.com>
+<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Andika:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@100..900&display=swap" rel=stylesheet>
+<link rel=preconnect href=https://fonts.googleapis.com>
+<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Andika:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel=stylesheet>
+<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css rel=stylesheet>
+<link rel=stylesheet href=/Css/index.css>
+<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/android-icon-36x36.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+
+</head>
+<body>
+<nav class="navbar glossy">
+<div class=logo>BalancedBites</div>
+<ul class=menu>
+<li><a href=/ >Home</a></li>
+<li><a href=/user/dietplan>Diet plans</a></li>
+<li><a href=/user/contact-us>Contact Us</a></li>
+<% if(userId !== 'none' && userRole !== 'Admin') {%>
+<li><a href="/user/dashboard/<%= userId %>">Dashboard</a></li>
+<%}%> <% if(userRole === 'Admin') {%>
+<li><a href=/main/admin>Dashboard</a></li>
+<%}%>
+</ul>
+<% if(userId !== 'none') {%>
+<form action=/logout method=post>
+<button class=cta-button type=submit>Log Out</button>
+</form>
+<%} else{%>
+<button class=cta-button>
+<a href=/login>Get Started</a>
+</button>
+<%}%>
+<div class=hamburger onclick=toggleMenu()>
+<div></div>
+<div></div>
+<div></div>
+</div>
+</nav>
+<div class="menu-container glossy">
+<ul class=menu-collapsed>
+<li><a href=/ >Home</a></li>
+<li><a href=/user/dietplan>Diet plans</a></li>
+<li><a href=/user/contact-us>Contact Us</a></li>
+<% if(userId !== 'none' && userRole !== 'Admin') {%>
+<li><a href="/user/dashboard/<%= userId %>">Dashboard</a></li>
+<%}%> <% if(userRole === 'Admin') {%>
+<li><a href=/main/admin>Dashboard</a></li>
+<%}%> <% if(userId !== 'none') {%>
+<form action=/logout method=post>
+<button class=cta-button style="padding:15px 25px;font-size:1.2rem" type=submit>
+Log Out
+</button>
+</form>
+<%} else{%>
+<button class=cta-button>
+<a href=/login>Get Started</a>
+</button>
+<%}%>
+</ul>
+</div>
+<div class=hero-section>
+<div class=hero-overlay></div>
+<div class=hero-content>
+<h1>Fuel Your Journey to Wellness with Balanced Bites</h1>
+<p>
+Welcome to Balanced Bites! Elevate your wellness journey with expert nutrition. Experience effortless healthy living and visible results. Embrace a balanced, healthier you!
+</p>
+<button class=cta-button>
+<a href=/register>Get Started</a>
+</button>
+</div>
+</div>
+<section class=content-section>
+<div class=text-content>
+<h1>Our Balanced Mission</h1>
+<p>
+At BalancedBites, we infuse a touch of creativity into your nutrition journey, transforming it into an engaging and rewarding adventure. Our skilled nutritionist creates personalized diet plans and provides expert guidance to help you achieve remarkable results. Join us on the path to a healthier you, where every meal is a step towards a balanced and vibrant life!
+</p>
+</div>
+<div class=image-content>
+<img src=https://res.cloudinary.com/dcj3x2sxm/image/upload/v1720975054/photo-1512621776951-a57141f2eefd_e3b3ox.jpg alt="Joyful eating">
+</div>
+</section>
+<section class=offer-section>
+<h1>What We Offer</h1>
+<div class=offer-container>
+<div class=card>
+<div class=card-header>Delicious Recipes</div>
+<div class=card-body>
+<p>
+Discover tasty recipes that are as healthy as they are delightful. Let's make every meal an exciting adventure!
+</p>
+<a href=/register class=btn>Start Your Journey</a>
+</div>
+</div>
+<div class=card>
+<div class=card-header>Personalized Diet Plans</div>
+<div class=card-body>
+<p>
+Enjoy a custom diet plan crafted just for you, making your wellness journey fun and deliciously easy!
+</p>
+<a href=/register class=btn>Find Your Fit</a>
+</div>
+</div>
+<div class=card>
+<div class=card-header>Counselling Sessions</div>
+<div class=card-body>
+<p>
+Receive heartfelt guidance and support in our friendly counselling sessions. We will help you thrive!
+</p>
+<a href=/register class=btn>Chat With Us</a>
+<p class=note>* Separate charges will apply.</p>
+</div>
+</div>
+</div>
+</section>
+<section class=content-section>
+<div class=text-content>
+<h1>Rediscover the Joy of Eating</h1>
+<p>
+Say goodbye to restrictive diets and hello to balanced, joyful eating. Our approach integrates practical nutrition advice with emotional support to help you rediscover the pleasure of nourishing your body.
+</p>
+</div>
+<div class=image-content>
+<img src=https://res.cloudinary.com/dcj3x2sxm/image/upload/v1720975127/People_eat_healthy_meals_at_served_table_dinner_party_px9zux.jpg alt="Joyful eating">
+</div>
+</section>
+<section class=faq-section>
+<h1 style=text-align:center>Curious Minds Ask</h1>
+<div class=faq-container>
+<div class=faq-item>
+<div class=faq-question>
+<span>How does it work?</span>
+<span class=faq-icon>▼</span>
+</div>
+<div class=faq-answer>
+Our nutrition plans are crafted with you in mind, tailored to fit your unique needs. Share your details, and we'll design a plan that helps you achieve your goals smoothly and effectively.
+</div>
+</div>
+<div class=faq-item>
+<div class=faq-question>
+<span>Are the plans Strict?</span>
+<span class=faq-icon>▼</span>
+</div>
+<div class=faq-answer>
+We're not the food police, but we do sprinkle some healthy discipline!
+</div>
+</div>
+<div class=faq-item>
+<div class=faq-question>
+<span>Can I cheat on the diet?</span>
+<span class=faq-icon>▼</span>
+</div>
+<div class=faq-answer>
+Of course, you can have occasional treats! Just remember, a little flexibility is fine, but sticking to the plan will help you see the best results.
+</div>
+</div>
+<div class=faq-item>
+<div class=faq-question>
+<span>Is counseling included?</span>
+<span class=faq-icon>▼</span>
+</div>
+<div class=faq-answer>
+Counseling is available but not included in the standard plan. If you're interested, we offer it as an additional service to help you reach your goals more effectively.
+</div>
+</div>
+<div class=faq-item>
+<div class=faq-question>
+<span>What if I hate veggies?</span>
+<span class=faq-icon>▼</span>
+</div>
+<div class=faq-answer>
+No worries! We'll help you incorporate veggies in a way that you’ll actually enjoy. Our goal is to make healthy eating enjoyable and satisfying for you.
+</div>
+</div>
+</div>
+</section>
+<div class=join-section>
+<img src=https://res.cloudinary.com/dcj3x2sxm/image/upload/v1720975181/pexels-janetrangdoan-1092730_pvdurz.jpg alt="Healthy Meal">
+<h1>Join the Blanced Community</h1>
+<p>Transform your plate, transform your life. Let's get started!</p>
+<button class=cta-button>
+<a href=/register>Get Started</a>
+</button>
+</div>
+<footer class=footer>
+<p style=margin-top:15px>&copy; 2024 Balanced Bites</p>
+</footer>
+<script>function toggleMenu(){const e=document.querySelector(".menu-container"),o=document.querySelector(".hamburger");e.classList.toggle("show"),o.classList.toggle("open")}</script>
+<script src=/js/navbar.js></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Montserrat", sans-serif;
+      padding: 0;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start; /* Adjusted to start content from the top */
+      background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+    }
+    .bodysection {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      flex: 1; /* Fill remaining space vertically */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/android-icon-36x36.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+</head>
+<body>
+  <%- include('../partials/navbar') %> 
+  <% if (success.length || error.length) { %>
+  <div class="flash_message"><%- include('../partials/flashMsg') %></div>
+  <% } %>
+  <div class="bodysection"><%- body %></div>
+</script>
+</body>
+</html>

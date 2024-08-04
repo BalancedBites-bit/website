@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang=en>
+<head>
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Admin Dashboard</title>
+<link rel=stylesheet href=/Css/admnDashboard.css>
+<script src=/js/adminDashboard.js></script>
+</head>
+<body>
+<div class=dashboard-container>
+<div class=navbar>
+<button class=active data-section=admitted-section onclick='showSection("admitted-section")'>
+Admitted Patients
+</button>
+<button data-section=upcoming-sessions onclick='showSection("upcoming-sessions")'>
+Upcoming Sessions
+</button>
+<button data-section=pending-section onclick='showSection("pending-section")'>
+Pending Patients
+</button>
+<button data-section=counseling-section onclick='showSection("counseling-section")'>
+Counseling Requests
+</button>
+</div>
+<% if (success.length || error.length) { %>
+<link rel=stylesheet href=/Css/flash.css>
+<% if (success && success.length) { %>
+<div id=flash-container class=flash-container>
+<div class="flash-message flash-success show">
+<p><%= success %></p>
+<span class=close-btn>&times;</span>
+</div>
+<% } %> <% if (error && error.length) { %>
+<div class="flash-message flash-warning show">
+<p><%= error %></p>
+<span class=close-btn>&times;</span>
+</div>
+</div>
+<% } %> <% } %>
+<div class=admitted-section id=admitted-section>
+<div class=dashboard-header>
+<h1>Admitted Patients</h1>
+<p>Here are the patients currently admitted</p>
+</div>
+<div class=card-container>
+<% patientData.forEach(function(patient) { %> <% if
+          (patient.admittanceStatus === 'Accepted' ) { %>
+<a href="<%= `/user/dashboard/${patient.accountId}` %>" style=text-decoration:none>
+<div class=card>
+<h2><%= patient.firstName %> <%= patient.lastName %></h2>
+<p><%= patient.email %></p>
+</div>
+</a>
+<% } %> <% }); %>
+</div>
+</div>
+<div class="upcoming-sessions hidden" id=upcoming-sessions>
+<div class=dashboard-header>
+<h1>Upcoming Counseling Sessions</h1>
+<p>Here are the upcoming counseing sessions</p>
+</div>
+<div class=card-container>
+<% counselingData.forEach(function(data) { %> <% if ( data.status ===
+          'Accepted') { %>
+<a href="<%= `/counseling/sessionInfo/${data.accountId}` %>" style=text-decoration:none>
+<div class=card>
+<h2><%= data.fullName %></h2>
+<p><%= data.email %></p>
+</div>
+<% } %> <% }); %>
+</a>
+</div>
+</div>
+<div class="pending-section hidden" id=pending-section>
+<div class=dashboard-header>
+<h1>Pending Patients</h1>
+<p>Here are the patients awaiting approval</p>
+</div>
+<div class=card-container>
+<% patientData.forEach(function(patient) { %> <% if
+          (patient.admittanceStatus === 'Pending Approval') { %>
+<div class=card>
+<h2><%= patient.firstName %> <%= patient.lastName %></h2>
+<p><%= patient.email %></p>
+<div class=btn-group>
+<form action="/main/admin/admissionStatus/accept/<%= patient.accountId %>/dietplan?_method=PUT" method=POST>
+<input type=hidden name=status value=Accepted>
+<button type=submit class=btn>Accept</button>
+</form>
+<form action="/main/admin/admissionStatus/reject/<%= patient.accountId %>/dietplan?_method=PUT" method=post>
+<input type=hidden name=status value=Rejected>
+<button type=submit class=btn>Reject</button>
+</form>
+</div>
+</div>
+<% } %> <% }); %>
+</div>
+</div>
+<div class="counseling-section hidden" id=counseling-section>
+<div class=dashboard-header>
+<h1>Counseling Requests</h1>
+<p>Here are the patients requesting counseling</p>
+</div>
+<div class=card-container>
+<% counselingData.forEach(function(data) { %> <% if (data.status ===
+          'Pending Approval' ) { %>
+<div class=card>
+<h2><%= data.fullName %></h2>
+<p><%= data.email %></p>
+<div class=btn-group>
+<form action="/counseling/sessionInfo/<%= data.accountId %>">
+<button type=submit class=btn>View</button>
+</form>
+<form action="/main/admin/admissionStatus/reject/<%= data.accountId %>/counseling?_method=PUT" method=post>
+<input type=hidden name=status value=Rejected>
+<button type=submit class=btn>Reject</button>
+</form>
+</div>
+</div>
+<% } %> <% }); %>
+</div>
+</div>
+</div>
+<% if (success.length || error.length) { %>
+<script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script>
+<script src=/js/flash.js></script>
+<% } %>
+</body>
+</html>

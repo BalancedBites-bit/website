@@ -1,0 +1,61 @@
+<link rel="stylesheet" href="/Css/navbar.css" />
+
+<nav class="navbar glossy">
+  <div class="logo">BalancedBites</div>
+  <ul class="menu">
+    <li><a href="/">Home</a></li>
+    <li><a href="/user/dietplan">Diet plan</a></li>
+    <li><a href="/user/contact-us">Contact Us</a></li>
+    <% if(userId !== 'none' && userRole !== 'Admin') {%>
+    <li><a href="/user/dashboard/<%= userId %>">Dashboard</a></li>
+    <%}%> <% if(userRole === 'Admin') {%>
+    <li><a href="/main/admin">Dashboard</a></li>
+    <%}%>
+  </ul>
+  <% if(userId !== 'none') {%>
+  <form action="/logout" method="post">
+    <button class="cta-button" type="submit">Log Out</button>
+  </form>
+  <%} else{%>
+  <button class="cta-button">
+    <a href="/login">Get Started</a>
+  </button>
+
+  <%}%>
+  <div class="hamburger" onclick="toggleMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</nav>
+<div class="menu-container glossy">
+  <ul class="menu-collapsed">
+    <li><a href="/">Home</a></li>
+    <li><a href="/user/dietplan">Diet plans</a></li>
+    <li><a href="/user/contact-us">Contact Us</a></li>
+    <% if(userId !== 'none' && userRole !== 'Admin') {%>
+    <li><a href="/user/dashboard/<%= userId %>">Dashboard</a></li>
+    <%}%> <% if(userRole === 'Admin') {%>
+    <li><a href="/main/admin">Dashboard</a></li>
+    <%}%>
+    <li>
+      <% if(userId !== 'none') {%>
+      <form action="/logout" method="post">
+        <button
+          class="cta-button"
+          style="padding: 15px 25px; font-size: 1.2rem"
+          type="submit"
+        >
+          Log Out
+        </button>
+      </form>
+      <%} else{%>
+      <button class="cta-button">
+        <a href="/login">Get Started</a>
+      </button>
+
+      <%}%>
+    </li>
+  </ul>
+</div>
+<script src="/js/navbar.js"></script>

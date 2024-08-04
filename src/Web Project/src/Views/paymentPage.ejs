@@ -1,0 +1,25 @@
+<%- layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/Css/Payment.css">
+<title>Payment</title>
+<div class="container">
+  <h1>Payment Information</h1>
+  <div class="account-info">
+    <p><strong>EMAN ALI</strong></p>
+    <p>Meezan Bank - Mirpur Branch, AJK</p>
+    <p>Account Number: 34040110090354</p>
+    <p>IBAN: PK95MEZN0034040110090354</p>
+  </div>
+  <form action="/payment/add/<%= userId %>/<%= context %>" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="screenshot">Upload Payment Screenshot</label>
+      <input
+        type="file"
+        id="screenshot"
+        name="image"
+        accept="image/*"
+        required
+      />
+    </div>
+    <button type="submit" class="btn-submit">Submit</button>
+  </form>
+</div>

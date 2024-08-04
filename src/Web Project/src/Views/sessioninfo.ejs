@@ -1,0 +1,63 @@
+<link rel="stylesheet" href="/Css/UserDashboard.css" />
+<title>Session Info</title>
+<%- layout('layouts/boilerplate') %>
+<style>
+  .dashboard-container{
+    margin-top: 150px;
+  }
+</style>
+
+<div class="dashboard-container">
+  <h1>Session Information</h1>
+  <div class="details">
+    <div>
+      <span>Name:</span>
+      <span id="session-name"><%= userData.fullName %></span>
+    </div>
+    <div>
+      <span>Email:</span>
+      <span id="session-email"><%= userData.email %></span>
+    </div>
+    <div>
+      <span>Date:</span>
+      <span id="session-date"
+        ><%= userData.date.toISOString().split('T')[0] %></span
+      >
+    </div>
+    <div>
+      <span>Reason:</span>
+      <p id="session-reason"><%= userData.reason %></p>
+    </div>
+  </div>
+
+  <% if (userData.status !== 'Accepted') { %>
+  <div class="btn-container">
+    <form
+      action="/main/admin/admissionStatus/accept/<%= userData.accountId %>/counseling?_method=PUT"
+      method="post"
+    >
+      <input type="hidden" name="status" value="Accepted" />
+      <button class="btn accept" style="margin: 10px" type="submit">
+        Accept
+      </button>
+    </form>
+    <form
+      action="/main/admin/admissionStatus/reject/<%= userData.accountId %>/counseling?_method=PUT"
+      method="post"
+    >
+      <input type="hidden" name="status" value="Rejected" />
+      <button class="btn reject" style="margin: 10px" type="submit">
+        Reject
+      </button>
+    </form>
+  </div>
+  <% } %> <% if (userData.status === 'Accepted' && userData.payment ===
+  'Pending') { %>
+  <form
+action="/main/verify-payment/<%= userData.accountId %>/counseling"
+method="post"
+  >
+    <button class="btn verify" type="submit">Verify Payment</button>
+  </form>
+  <% } %>
+</div>

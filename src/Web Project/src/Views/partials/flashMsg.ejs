@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="/Css/flash.css" />
+<% if (success && success.length) { %>
+<div id="flash-container" class="flash-container">
+  <div class="flash-message flash-success show">
+    <p><%= success %></p>
+    <span class="close-btn">&times;</span>
+  </div>
+
+  <% } %> <% if (error && error.length) { %>
+
+  <div class="flash-message flash-warning show">
+    <p><%= error %></p>
+    <span class="close-btn">&times;</span>
+  </div>
+</div>
+<% } %>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/flash.js"></script>

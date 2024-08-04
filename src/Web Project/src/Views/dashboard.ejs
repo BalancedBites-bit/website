@@ -1,0 +1,92 @@
+<%- layout('layouts/boilerplate') %>
+<link rel=stylesheet href=/Css/UserDashboard.css>
+<title>User Dashboard</title>
+<main class=dashboard-container>
+<h1><%= userData.firstName %> <%= userData.lastName %></h1>
+<div class=details>
+<div><span>Email:</span> <%= userData.email %></div>
+<div><span>First Name:</span> <%= userData.firstName %></div>
+<div><span>Last Name:</span> <%= userData.lastName %></div>
+<div><span>Age:</span> <%= userData.age %></div>
+<div><span>Weight (kg):</span> <%= userData.weight %></div>
+<div><span>Height (cm):</span> <%= userData.height %></div>
+<div><span>Physical Activity:</span> <%= userData.physicalActivity %></div>
+<div><span>Allergy:</span> <%= userData.allergy || 'None' %></div>
+<div><span>Phone Number:</span> <%= userData.phoneNumber %></div>
+<div><span>Gender:</span> <%= userData.gender %></div>
+<% if (isAdmin) { %>
+<div><span>Message:</span> <%= userData.message || 'None' %></div>
+<% } %>
+</div>
+<div class=diet-card>
+<h2>Diet Plan</h2>
+<% if (dietData) { %>
+<% if (['Accepted', 'Pending Approval'].includes(userData.admittanceStatus)) { %>
+<div><span>Date Subscribed:</span> <%= dietData.dateJoined.toISOString().split('T')[0] %></div>
+<div><span>Diet Type:</span> <%= dietData.dietType %></div>
+<div><span>Duration:</span> <%= dietData.duration %> month<%= dietData.duration > 1 ? 's' : '' %></div>
+<div><span>Status:</span> <%= userData.admittanceStatus %></div>
+<div>
+<% if (isOwner && userData.admittanceStatus === 'Accepted') { %>
+<div>
+<% if (dietData.paymentStatusVerification === 'None') { %>
+<span>Payment: </span><a class=payment href="/payment/add/<%= userData._id %>/dietplan">Add Payment</a>
+<% } else { %>
+<span>Payment Verification: </span> <%= dietData.paymentStatusVerification %>
+<% } %>
+</div>
+<% } %>
+</div>
+<% if (isOwner) { %>
+<form action="/user/delete/<%= dietData.accountId %>/dietplan" method=post>
+<button class=btn>Delete</button>
+</form>
+<% } %>
+<%if(isAdmin && dietData.paymentStatusVerification === 'Pending') {%>
+<form action="/main/verify-payment/<%= dietData.accountId %>/dietplan" method=post>
+<button class="btn verify" type=submit>Verify Payment</button>
+</form>
+<% } %>
+<% } %>
+<% } else if (isOwner) { %>
+<a class=payment href=/user/dietplan>Add a diet plan</a>
+<% } %>
+</div>
+<% if (isOwner) { %>
+<div class=diet-card>
+<h2>Counselling Session</h2>
+<% if (counselingData) { %>
+<% if (['Accepted', 'Pending Approval'].includes(counselingData.status)) { %>
+<div><span>Session Date:</span> <%= counselingData.date.toISOString().split('T')[0] %></div>
+<div><span>Status:</span> <%= counselingData.status %></div>
+<% if (counselingData.status === 'Accepted') { %>
+<div>
+<% if (counselingData.payment === 'None') { %>
+<span>Payment: </span><a class=payment href="/payment/add/<%= userData._id %>/counseling">Add Payment</a>
+<% } else { %>
+<span>Payment Verification: </span> <%= counselingData.payment %>
+<% } %>
+</div>
+<% } %>
+<% if (isOwner) { %>
+<form action="/user/delete/<%= counselingData.accountId %>/counseling" method=post>
+<button class=btn>Delete</button>
+</form>
+<% } %>
+<% } %>
+<% } else if (isOwner) { %>
+<a class=payment href="/counseling/request/<%= userData.accountId %>">Request Counselling</a>
+<% } %>
+</div>
+<% } %>
+<% if (isAdmin && userData.payment === 'Pending') { %>
+<form action="/main/verify-payment/<%= userData.accountId %>/dietplan" method=post>
+<button class="btn verify">Verify Payment</button>
+</form>
+<% } %>
+<% if (isOwner) { %>
+<div class=btn-container>
+<a class="btn edit" href="/user/edit-info/<%= userData._id%>">Edit</a>
+</div>
+<% } %>
+</main>
