@@ -165,6 +165,7 @@ app.use("/main", adminRouter),
         (s.session.otp = l),
           (s.session.userData = { Email: t, Username: a, Password: n }),
           (s.session.otpContext = "userRegister"),
+  
           await e(t.toLowerCase(), l),
           s.flash(
             "success",
