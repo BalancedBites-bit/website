@@ -43,7 +43,6 @@ router
             req.flash("success", "Logged In Succesfully.");
             return resetOTPContext(req, res, "/main/admin");
           case "resetPassword":
-            console.log(req.session.otpVerified);
             return res.redirect("/password/reset");
             break;
           case "userRegister":
