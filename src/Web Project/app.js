@@ -45,7 +45,7 @@ app.use(
     resave: !1,
     saveUninitialized: !0,
     store: store,
-    cookie: { httpOnly: !0, maxAge: 12096e5, secure: !1 },
+    cookie: { httpOnly: true, maxAge: 12096e5, secure: true },
   })
 ),
   app.use(flash()),
